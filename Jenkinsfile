@@ -14,14 +14,14 @@ spec:
     command: ["cat"]
     env:
     - name: PROJECT_URL
-      value: https://github.com/JungBin-Eom/React_APP_Deploy_on_K8S.git
+      value: <URL of your github project>
   - name: docker # docker container 실행(dockerfile을 기반으로 이미지 생성)
     image: docker
     tty: true 
     command: ["cat"]
     env:
     - name: PROJECT_NAME
-      value: react-app-ci-pipeline
+      value: <Project Name>
     volumeMounts: # DinD(Docker-in-Docker)를 위한 볼륨 마운트
     - mountPath: /var/run/docker.sock
       name: docker-socket
@@ -46,27 +46,9 @@ spec:
           container('docker') {
             // build docker image
             sh """
-            cd React_APP_Deploy_on_K8S
+            cd $PROJECT_NAME
             docker build -t \$PROJECT_NAME .
             """
-          }
-        }
-      }
-      stage('Push') {
-        steps {
-          container('docker') {
-            // get dockerhub credentials
-            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-              credentialsId: 'dockerhub',
-              usernameVariable: 'DOCKERHUB_USER',
-              passwordVariable: 'DOCKERHUB_PASSWORD']]) {
-              // image packaging and upload
-              sh """
-                docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
-                docker tag \$PROJECT_NAME ${DOCKERHUB_USER}/\$PROJECT_NAME
-                docker push ${DOCKERHUB_USER}/\$PROJECT_NAME
-              """
-            }
           }
         }
       }
