@@ -46,7 +46,7 @@ spec:
           container('docker') {
             // build docker image
             sh """
-            cd $PROJECT_NAME
+            cd \$PROJECT_NAME
             docker build -t \$PROJECT_NAME .
             """
           }
