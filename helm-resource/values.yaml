@@ -1,4 +1,4 @@
 # 여기에 있는 거를 deployment와 service에 적용할 수 있도록 바꿔야함
 image:
-  name: # 여기를 repo 이름
+  name: # 여기를 repo 이름과 같도록(docker 이미지 이름)
   tag: latest
