@@ -1,4 +1,4 @@
 # 여기에 있는 거를 deployment와 service에 적용할 수 있도록 바꿔야함
 image:
-  name: nginx
+  name: # 여기를 repo 이름
   tag: latest
