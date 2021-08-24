@@ -14,14 +14,14 @@ spec:
     command: ["cat"]
     env:
     - name: PROJECT_URL
-      value: <URL of your github project>
+      value: <GITHUB_URL>
   - name: docker # docker container 실행(dockerfile을 기반으로 이미지 생성)
     image: docker
     tty: true 
     command: ["cat"]
     env:
     - name: PROJECT_NAME
-      value: <Project Name>
+      value: <APP_NAME>
     volumeMounts: # DinD(Docker-in-Docker)를 위한 볼륨 마운트
     - mountPath: /var/run/docker.sock
       name: docker-socket
