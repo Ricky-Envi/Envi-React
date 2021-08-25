@@ -52,5 +52,22 @@ spec:
           }
         }
       }
+      stage('Push') {
+        steps {
+          container('docker') {
+            // get dockerhub credentials
+            withCredentials([[$class: 'UsernamePasswordMultiBinding',
+              credentialsId: 'dockerhub',
+              usernameVariable: 'DOCKERHUB_USER',
+              passwordVariable: 'DOCKERHUB_PASSWORD']]) {
+              // image packaging and upload
+              sh """
+                docker login -u ${DOCKERHUB_USER} -p ${DOCKERHUB_PASSWORD}
+                docker tag \$PROJECT_NAME ${DOCKERHUB_USER}/\$PROJECT_NAME
+                docker push ${DOCKERHUB_USER}/\$PROJECT_NAME
+              """
+            }
+          }
+        }
     }
 }
