@@ -57,7 +57,7 @@ spec:
           container('docker') {
             // get dockerhub credentials
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
-              credentialsId: 'dockerhub',
+              credentialsId: 'envi-dockerhub',
               usernameVariable: 'DOCKERHUB_USER',
               passwordVariable: 'DOCKERHUB_PASSWORD']]) {
               // image packaging and upload
